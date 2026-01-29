@@ -16,7 +16,7 @@
 
                 <p class="text-charcoal mb-4">Have questions? We'd love to hear from you.</p>
 
-                <p class="text-charcoal mb-2"><strong>Email:</strong> info@oakfurnitures.com</p>
+                <p class=\"text-charcoal mb-2\"><strong>Email:</strong> info@canonfurnitures.com</p>
 
                 <p class="text-charcoal mb-2"><strong>Phone:</strong> +254 794 939949</p>
 

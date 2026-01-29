@@ -7,6 +7,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,14 +34,16 @@ Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categ
 
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () { return view('admin.dashboard'); });
-    Route::get('/products', function () { return view('admin.products'); });
-    Route::get('/categories', function () { return view('admin.categories'); });
-    Route::get('/orders', function () { return view('admin.orders'); });
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('admin.products.update');
-    });
+// Admin Routes - Protected by auth and admin middleware
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

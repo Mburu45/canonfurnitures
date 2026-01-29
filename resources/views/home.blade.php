@@ -185,7 +185,7 @@
 
     </section>
 
-    <!-- Why Oak Furnitures -->
+    <!-- Why Canon Furnitures -->
 
     <section class="py-16 bg-forest-green text-off-white">
 

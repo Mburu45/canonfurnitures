@@ -83,10 +83,9 @@
 
                         @php
 
-                            $filename = $image->getFilename();
-
-                            $name = ucwords(str_replace(['_', '-', '.jpeg', '.jpg', '.png'], [' ', ' ', '', '', ''], $filename));
-
+                            $img = $product->images()->first();
+                            $filename = $img ? $img->image_path : 'placeholder.jpg';
+                            $name = ucwords(str_replace(['_', '-', '.jpeg', '.jpg', '.png'], [' ', ' ', '', '', ''], pathinfo($filename, PATHINFO_FILENAME)));
                             $price = rand(15000, 100000); // Random price for demo
 
                         @endphp

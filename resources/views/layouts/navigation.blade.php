@@ -34,6 +34,12 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
+                        @if(Auth::user()->role === 'admin')
+                            <x-dropdown-link :href="route('admin.dashboard')">
+                                {{ __('Admin Dashboard') }}
+                            </x-dropdown-link>
+                            <hr class="my-2">
+                        @endif
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -49,7 +55,6 @@
                 </x-dropdown>
                 @else
                 <a href="/login" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Login</a>
-                <a href="/register" class="bg-oak-brown text-off-white hover:bg-dark-oak px-3 py-2 rounded-md text-sm font-medium">Register</a>
                 @endauth
             </div>
 
@@ -95,6 +100,7 @@
                     <a href="/contact" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Contact</a>
                     <a href="/cart" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Cart</a>
                     @auth
+                    <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Admin Dashboard</a>
                     <a href="{{ route('profile.edit') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Account</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -102,7 +108,6 @@
                     </form>
                     @else
                     <a href="/login" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Login</a>
-                    <!-- <a href="/register" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Register</a> -->
                     @endauth
                 </nav>
             </div>
