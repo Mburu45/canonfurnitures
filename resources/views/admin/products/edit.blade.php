@@ -65,7 +65,7 @@
 
                 <!-- Product Image -->
                 <div class="mb-6">
-                    <label for="image" class="block text-sm font-medium text-charcoal mb-2">Product Image</label>
+                    <label class="block text-sm font-medium text-charcoal mb-2">Product Image</label>
                     
                     <!-- Current Image -->
                     @if($product->images()->first())
@@ -75,11 +75,25 @@
                         </div>
                     @endif
                     
-                    <input type="file" id="image" name="image" accept="image/*" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image') border-red-500 @enderror">
-                    <p class="text-xs text-gray-500 mt-1">Upload a new image to replace the current one (JPG, PNG, GIF)</p>
-                    @error('image')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+                    <!-- Image URL Input (for Cloudinary, etc.) -->
+                    <div class="mb-4">
+                        <label for="image_url" class="block text-sm font-medium text-charcoal mb-2">Image URL (Cloudinary or external)</label>
+                        <input type="url" id="image_url" name="image_url" placeholder="https://res.cloudinary.com/..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image_url') border-red-500 @enderror" value="{{ old('image_url') }}">
+                        <p class="text-xs text-gray-500 mt-1">Paste a URL from Cloudinary or any external image service</p>
+                        @error('image_url')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- File Upload Input -->
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-charcoal mb-2">Or Upload Image File</label>
+                        <input type="file" id="image" name="image" accept="image/*" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image') border-red-500 @enderror">
+                        <p class="text-xs text-gray-500 mt-1">JPG, PNG, GIF (leave empty to keep current image)</p>
+                        @error('image')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Active Status -->
