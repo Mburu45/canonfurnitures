@@ -25,8 +25,6 @@ php artisan migrate --seed
 php artisan serve
 npm run dev
 
-# Login: admin@canonfurnitures.com / admin123456
-```
 
 ## ✨ Features
 
@@ -193,7 +191,6 @@ id, product_id (FK), image_path, is_primary (boolean), created_at, updated_at
 The project includes:
 - **4 Categories**: Beds, Sofas, Dining Sets, TV Stands
 - **12 Products**: Various furniture with prices and stock
-- **Admin Account**: admin@canonfurnitures.com / admin123456
 
 Run seeder to populate:
 ```bash
@@ -296,7 +293,7 @@ This project is open-source software licensed under the [MIT license](LICENSE.md
 ## 📞 Support
 
 - **Email**: support@canonfurnitures.com
-- **WhatsApp**: +254 798 422727
+
 - **Issues**: Create an issue on GitHub
 
 ## 🙏 Acknowledgments
