@@ -88,9 +88,9 @@
                             $price = $product->price;
                         @endphp
 
-                        <div class="bg-white rounded-md shadow-md overflow-hidden">
+                        <div class="bg-white rounded-md shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
 
-                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
+                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-110 lightbox-image" data-image="{{ $imageUrl }}">
 
                             <div class="p-4">
 
@@ -135,5 +135,82 @@
 </div>
 
 @include('layouts.footer')
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
+    <div class="relative max-w-4xl max-h-[90vh]">
+        <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+        <button id="lightbox-close" class="absolute top-4 right-4 bg-white hover:bg-gray-200 text-black px-4 py-2 rounded-full text-2xl font-bold transition">
+            &times;
+        </button>
+        <button id="lightbox-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-200 text-black px-4 py-3 rounded-full text-2xl font-bold transition">
+            &#10094;
+        </button>
+        <button id="lightbox-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white hover:bg-gray-200 text-black px-4 py-3 rounded-full text-2xl font-bold transition">
+            &#10095;
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        const images = document.querySelectorAll('.lightbox-image');
+        let currentImageIndex = 0;
+        let allImages = [];
+
+        // Collect all images
+        images.forEach((img, index) => {
+            allImages.push(img.dataset.image);
+        });
+
+        // Open lightbox
+        images.forEach((img, index) => {
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentImageIndex = index;
+                lightboxImage.src = allImages[currentImageIndex];
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        // Close lightbox
+        lightboxClose.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        // Navigation
+        lightboxPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+            lightboxImage.src = allImages[currentImageIndex];
+        });
+
+        lightboxNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % allImages.length;
+            lightboxImage.src = allImages[currentImageIndex];
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') lightboxPrev.click();
+                if (e.key === 'ArrowRight') lightboxNext.click();
+                if (e.key === 'Escape') lightboxClose.click();
+            }
+        });
+    });
+</script>
 
 @endsection
