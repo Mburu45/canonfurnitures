@@ -14,14 +14,14 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         // Check if admin user already exists
-        if (User::where('email', 'admin@canonfurnitures.com')->exists()) {
+        if (User::where('email', 'canonfurnitures@gmail.com')->exists()) {
             return;
         }
 
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@canonfurnitures.com',
-            'password' => bcrypt('admin123456'),
+            'email' => 'canonfurnitures@gmail.com',
+            'password' => bcrypt('secret123'),
             'role' => 'admin',
             'email_verified_at' => now(),
         ]);

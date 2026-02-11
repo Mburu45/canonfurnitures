@@ -11,24 +11,17 @@
             <div>
 
                 @php
-
-                    $images = collect(\File::files(public_path('images')))->filter(function ($img) use ($product) {
-
-                        return str_contains(strtolower($img->getFilename()), strtolower($product->category->slug ?? ''));
-
-                    });
-
+                    $images = $product->images;
                     $mainImage = $images->first();
-
                 @endphp
 
-                <img src="{{ $mainImage ? asset('images/'.$mainImage->getFilename()) : asset('images/placeholder.png') }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-md mb-4" id="main-image">
+                <img src="{{ $mainImage ? $mainImage->image_url : asset('images/placeholder.png') }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-md mb-4" id="main-image">
 
                 <div class="grid grid-cols-4 gap-2">
 
                     @foreach($images as $img)
 
-                        <img src="{{ asset('images/'.$img->getFilename()) }}" alt="{{ $product->name }}" class="w-full h-24 object-cover rounded-md cursor-pointer gallery-image" data-src="{{ asset('images/'.$img->getFilename()) }}">
+                        <img src="{{ $img->image_url }}" alt="{{ $product->name }}" class="w-full h-24 object-cover rounded-md cursor-pointer gallery-image" data-src="{{ $img->image_url }}">
 
                     @endforeach
 
@@ -49,35 +42,21 @@
                 <p class="text-charcoal mb-6">{{ $product->description }}</p>
 
                 @php
-
                     $phone = config('services.whatsapp.number');
-
                     $message = "Hello Canon Furnitures 👋\n\n"
-
                         ."I am interested in:\n\n"
-
                         ."🪑 Product: {$product->name}\n"
-
                         ."💰 Price: KES {$product->price}\n\n"
-
                         ."Please assist me with availability and delivery.";
-
                 @endphp
 
                 <a
-
                     href="https://wa.me/{{ $phone }}?text={{ urlencode($message) }}"
-
                     target="_blank"
-
                     class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md flex items-center gap-2 mb-6"
-
                 >
-
                     <i class="fa-brands fa-whatsapp text-xl"></i>
-
                     Order on WhatsApp
-
                 </a>
 
             </div>
@@ -95,20 +74,12 @@
                 @foreach($relatedProducts as $related)
 
                     @php
-
-                        $relImages = collect(\File::files(public_path('images')))->filter(function ($img) use ($related) {
-
-                            return str_contains(strtolower($img->getFilename()), strtolower($related->category->slug ?? ''));
-
-                        });
-
-                        $relImage = $relImages->first();
-
+                        $relImage = $related->images()->first();
                     @endphp
 
                     <div class="bg-white rounded-md shadow-md overflow-hidden">
 
-                        <img src="{{ $relImage ? asset('images/'.$relImage->getFilename()) : asset('images/placeholder.png') }}" alt="{{ $related->name }}" class="w-full h-48 object-cover">
+                        <img src="{{ $relImage ? $relImage->image_url : asset('images/placeholder.png') }}" alt="{{ $related->name }}" class="w-full h-48 object-cover">
 
                         <div class="p-4">
 
@@ -130,9 +101,9 @@
 
     </div>
 
-@include('layouts.footer')
-
 </div>
+
+@include('layouts.footer')
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

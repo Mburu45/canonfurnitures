@@ -80,58 +80,40 @@
 
 @foreach($products as $product)
 
-
                         @php
-
                             $img = $product->images()->first();
-                            $filename = $img ? $img->image_path : 'placeholder.jpg';
-                            $name = ucwords(str_replace(['_', '-', '.jpeg', '.jpg', '.png'], [' ', ' ', '', '', ''], pathinfo($filename, PATHINFO_FILENAME)));
-                            $price = rand(15000, 100000); // Random price for demo
-
+                            $imageUrl = $img ? $img->image_url : asset('images/placeholder.jpg');
+                            $price = $product->price;
                         @endphp
 
                         <div class="bg-white rounded-md shadow-md overflow-hidden">
 
-                            <img src="{{ asset('images/'.$filename) }}" alt="{{ $name }}" class="w-full h-48 object-cover">
+                            <img src="{{ $imageUrl }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
 
                             <div class="p-4">
 
-                                <h3 class="text-lg font-medium text-charcoal">{{ $name }}</h3>
+                                <h3 class="text-lg font-medium text-charcoal">{{ $product->name }}</h3>
 
                                 <p class="text-oak-brown font-bold">KES {{ number_format($price) }}</p>
 
                                 <p class="text-sm text-gray-600">In Stock</p>
 
                                 @php
-
                                     $phone = config('services.whatsapp.number');
-
                                     $message = "Hello Canon Furnitures 👋\n\n"
-
                                         ."I am interested in:\n\n"
-
-                                        ."🪑 Product: {$name}\n"
-
+                                        ."🪑 Product: {$product->name}\n"
                                         ."💰 Price: KES {$price}\n\n"
-
                                         ."Please assist me with availability and delivery.";
-
                                 @endphp
 
                                 <a
-
                                     href="https://wa.me/{{ $phone }}?text={{ urlencode($message) }}"
-
                                     target="_blank"
-
                                     class="mt-2 inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2"
-
                                 >
-
                                     <i class="fa-brands fa-whatsapp"></i>
-
                                     Order on WhatsApp
-
                                 </a>
 
                             </div>
@@ -148,8 +130,8 @@
 
     </div>
 
-@include('layouts.footer')
-
 </div>
+
+@include('layouts.footer')
 
 @endsection

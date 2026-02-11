@@ -6,8 +6,8 @@
         
         <h1 class="text-3xl font-serif font-bold text-charcoal mb-8">Edit Product</h1>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <form method="POST" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <form method="POST" action="{{ route('admin.products.update', $product->id) }}">
                 @csrf
                 @method('PUT')
 
@@ -63,39 +63,6 @@
                     @enderror
                 </div>
 
-                <!-- Product Image -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-charcoal mb-2">Product Image</label>
-                    
-                    <!-- Current Image -->
-                    @if($product->images()->first())
-                        <div class="mb-4 p-4 bg-gray-50 rounded-md">
-                            <p class="text-sm text-gray-600 mb-2">Current Image:</p>
-                            <img src="{{ asset('images/' . $product->images()->first()->image_path) }}" alt="{{ $product->name }}" class="h-40 w-40 object-cover rounded-md">
-                        </div>
-                    @endif
-                    
-                    <!-- Image URL Input (for Cloudinary, etc.) -->
-                    <div class="mb-4">
-                        <label for="image_url" class="block text-sm font-medium text-charcoal mb-2">Image URL (Cloudinary or external)</label>
-                        <input type="url" id="image_url" name="image_url" placeholder="https://res.cloudinary.com/..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image_url') border-red-500 @enderror" value="{{ old('image_url') }}">
-                        <p class="text-xs text-gray-500 mt-1">Paste a URL from Cloudinary or any external image service</p>
-                        @error('image_url')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- File Upload Input -->
-                    <div>
-                        <label for="image" class="block text-sm font-medium text-charcoal mb-2">Or Upload Image File</label>
-                        <input type="file" id="image" name="image" accept="image/*" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image') border-red-500 @enderror">
-                        <p class="text-xs text-gray-500 mt-1">JPG, PNG, GIF (leave empty to keep current image)</p>
-                        @error('image')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-
                 <!-- Active Status -->
                 <div class="mb-6">
                     <label class="flex items-center">
@@ -114,6 +81,44 @@
                     </a>
                 </div>
             </form>
+        </div>
+
+        <!-- Product Images Section -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-lg font-semibold mb-4">Product Images</h3>
+
+            <!-- Attach Images Form -->
+            <form method="POST" action="{{ route('admin.products.images.store', $product) }}" class="mb-6">
+                @csrf
+                <label class="block text-sm font-medium text-charcoal mb-2">Attach Cloudinary URLs (one per line)</label>
+                <textarea name="image_urls[]" rows="5" placeholder="https://res.cloudinary.com/..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown"></textarea>
+                <button type="submit" class="mt-2 bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md font-medium transition">
+                    Attach Images
+                </button>
+            </form>
+
+            <!-- Current Images -->
+            @if($product->images->count() > 0)
+                <div class="grid grid-cols-3 gap-4">
+                    @foreach($product->images as $image)
+                        <div class="relative">
+                            <img src="{{ $image->image_url }}" alt="{{ $product->name }}" class="w-full h-32 object-cover rounded">
+                            @if($image->is_primary)
+                                <span class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Primary</span>
+                            @endif
+                            <form method="POST" action="{{ route('admin.products.images.destroy', $image) }}" class="absolute top-2 right-2">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white text-xs px-2 py-1 rounded" onclick="return confirm('Delete this image?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-gray-500">No images attached yet.</p>
+            @endif
         </div>
     </div>
 </div>
