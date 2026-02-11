@@ -81,8 +81,10 @@
 @foreach($products as $product)
 
                         @php
-                            $img = $product->images()->first();
-                            $imageUrl = $img ? $img->image_url : asset('images/placeholder.jpg');
+                            $img = $product->images->first();
+                            $imageUrl = $img && $img->image_path
+                                ? $img->image_path
+                                : asset('images/placeholder.jpg');
                             $price = $product->price;
                         @endphp
 
@@ -94,7 +96,7 @@
 
                                 <h3 class="text-lg font-medium text-charcoal">{{ $product->name }}</h3>
 
-                                <p class="text-oak-brown font-bold">KES {{ number_format($price) }}</p>
+                                <p class="text-oak-brown font-bold">KES {{ number_format($price, 2) }}</p>
 
                                 <p class="text-sm text-gray-600">In Stock</p>
 

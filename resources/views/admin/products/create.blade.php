@@ -7,7 +7,7 @@
         <h1 class="text-3xl font-serif font-bold text-charcoal mb-8">Add New Product</h1>
 
         <div class="bg-white rounded-lg shadow-md p-6">
-            <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.products.store') }}" method="POST">
                 @csrf
 
                 <!-- Product Name -->
@@ -62,31 +62,6 @@
                     @enderror
                 </div>
 
-                <!-- Product Image -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-charcoal mb-2">Product Image</label>
-                    
-                    <!-- Image URL Input (for Cloudinary, etc.) -->
-                    <div class="mb-4">
-                        <label for="image_url" class="block text-sm font-medium text-charcoal mb-2">Image URL (Cloudinary or external)</label>
-                        <input type="url" id="image_url" name="image_url" placeholder="https://res.cloudinary.com/..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image_url') border-red-500 @enderror" value="{{ old('image_url') }}">
-                        <p class="text-xs text-gray-500 mt-1">Paste a URL from Cloudinary or any external image service</p>
-                        @error('image_url')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- File Upload Input -->
-                    <div>
-                        <label for="image" class="block text-sm font-medium text-charcoal mb-2">Or Upload Image File</label>
-                        <input type="file" id="image" name="image" accept="image/*" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('image') border-red-500 @enderror">
-                        <p class="text-xs text-gray-500 mt-1">JPG, PNG, GIF (max 2MB)</p>
-                        @error('image')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-
                 <!-- Active Status -->
                 <div class="mb-6">
                     <label class="flex items-center">
@@ -106,6 +81,8 @@
                 </div>
             </form>
         </div>
+
+        <p class="text-gray-500 mt-4 text-sm">After creating the product, you can upload images from the edit page.</p>
     </div>
 </div>
 @endsection

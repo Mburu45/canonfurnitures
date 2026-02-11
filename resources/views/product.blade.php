@@ -15,13 +15,13 @@
                     $mainImage = $images->first();
                 @endphp
 
-                <img src="{{ $mainImage ? $mainImage->image_url : asset('images/placeholder.png') }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-md mb-4" id="main-image">
+                <img src="{{ $mainImage && $mainImage->image_path ? $mainImage->image_path : asset('images/placeholder.png') }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-md mb-4" id="main-image">
 
                 <div class="grid grid-cols-4 gap-2">
 
                     @foreach($images as $img)
 
-                        <img src="{{ $img->image_url }}" alt="{{ $product->name }}" class="w-full h-24 object-cover rounded-md cursor-pointer gallery-image" data-src="{{ $img->image_url }}">
+                        <img src="{{ $img->image_path }}" alt="{{ $product->name }}" class="w-full h-24 object-cover rounded-md cursor-pointer gallery-image" data-src="{{ $img->image_path }}">
 
                     @endforeach
 
@@ -35,7 +35,7 @@
 
                 <h1 class="text-3xl font-serif font-bold text-charcoal mb-4">{{ $product->name }}</h1>
 
-                <p class="text-oak-brown font-bold text-2xl mb-4">KES {{ number_format($product->price) }}</p>
+                <p class="text-oak-brown font-bold text-2xl mb-4">KES {{ number_format($product->price, 2) }}</p>
 
                 <p class="text-gray-600 mb-4">{{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}</p>
 
@@ -79,13 +79,13 @@
 
                     <div class="bg-white rounded-md shadow-md overflow-hidden">
 
-                        <img src="{{ $relImage ? $relImage->image_url : asset('images/placeholder.png') }}" alt="{{ $related->name }}" class="w-full h-48 object-cover">
+                        <img src="{{ $relImage && $relImage->image_path ? $relImage->image_path : asset('images/placeholder.png') }}" alt="{{ $related->name }}" class="w-full h-48 object-cover">
 
                         <div class="p-4">
 
                             <h3 class="text-lg font-medium text-charcoal">{{ $related->name }}</h3>
 
-                            <p class="text-oak-brown font-bold">KES {{ number_format($related->price) }}</p>
+                            <p class="text-oak-brown font-bold">KES {{ number_format($related->price, 2) }}</p>
 
                             <a href="{{ route('product.show', $related->slug) }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 

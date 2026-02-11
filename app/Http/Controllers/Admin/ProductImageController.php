@@ -18,7 +18,7 @@ class ProductImageController extends Controller
         foreach ($request->input('image_urls', []) as $url) {
             ProductImage::create([
                 'product_id' => $product->id,
-                'image_url' => $url,
+                'image_path' => $url,
                 'is_primary' => false,
             ]);
         }
