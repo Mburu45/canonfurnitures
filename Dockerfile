@@ -1,6 +1,6 @@
 FROM php:8.2-cli
 
-# Install system dependencies
+# Install system dependencies including libpq-dev for PostgreSQL
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -8,11 +8,11 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \
+    libpq-dev \      # <-- Required for PostgreSQL PDO
     zip \
     curl
 
-# Install PHP extensions including PostgreSQL
+# Install PHP extensions including PostgreSQL PDO
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring zip exif pcntl
 
 # Install Composer
@@ -24,7 +24,7 @@ WORKDIR /var/www
 # Copy app files
 COPY . .
 
-# Install dependencies
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Set permissions
