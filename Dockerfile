@@ -8,11 +8,12 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libpq-dev \
     zip \
     curl
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
+# Install PHP extensions including PostgreSQL
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring zip exif pcntl
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -26,8 +27,16 @@ COPY . .
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+# Set permissions
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
+
+# Cache config/routes
+RUN php artisan config:cache
+RUN php artisan route:cache
+
 # Expose Render port
 EXPOSE 10000
 
 # Start Laravel
-CMD php -S 0.0.0.0:10000 -t public
+CMD php artisan serve --host=0.0.0.0 --port=10000
