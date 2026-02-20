@@ -66,7 +66,7 @@
 
                 <h1 class="text-3xl font-serif font-bold text-charcoal mb-4">{{ $product->name }}</h1>
 
-                <p class="text-oak-brown font-bold text-2xl mb-4">KES {{ number_format($product->price, 2) }}</p>
+                <p class="text-oak-brown font-bold text-2xl mb-4">KSh {{ number_format($product->price, 2) }}</p>
 
                 <p class="text-gray-600 mb-4">{{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}</p>
 
@@ -77,7 +77,7 @@
                     $message = "Hello Canon Furnitures 👋\n\n"
                         ."I am interested in:\n\n"
                         ."🪑 Product: {$product->name}\n"
-                        ."💰 Price: KES {$product->price}\n\n"
+                        ."💰 Price: KSh ".number_format($product->price, 2)."\n\n"
                         ."Please assist me with availability and delivery.";
                 @endphp
 
@@ -116,7 +116,7 @@
 
                             <h3 class="text-lg font-medium text-charcoal">{{ $related->name }}</h3>
 
-                            <p class="text-oak-brown font-bold">KES {{ number_format($related->price, 2) }}</p>
+                            <p class="text-oak-brown font-bold">KSh {{ number_format($related->price, 2) }}</p>
 
                             <a href="{{ route('product.show', $related->slug) }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 

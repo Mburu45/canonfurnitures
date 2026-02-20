@@ -9,16 +9,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <a href="/" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                    <a href="/shop" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Shop</a>
-                    <a href="/about" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">About</a>
-                    <a href="/contact" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <a href="{{ route('home') }}" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="{{ route('shop.index') }}" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Shop</a>
+                    <a href="{{ route('about') }}" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="{{ route('contact') }}" class="text-charcoal hover:text-oak-brown px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                 </div>
             </div>
 
             <!-- Cart and Account -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
-                <a href="/cart" class="text-charcoal hover:text-oak-brown">
+                <a href="{{ route('cart.index') }}" class="text-charcoal hover:text-oak-brown">
                     <i class="fas fa-shopping-cart text-lg"></i>
                 </a>
                 @auth
@@ -81,24 +81,24 @@
             </div>
             <div class="flex-1 px-4">
                 <nav class="space-y-4">
-                    <a href="/" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Home</a>
-                    <a href="/shop" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Shop</a>
+                    <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Home</a>
+                    <a href="{{ route('shop.index') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Shop</a>
                     <div>
                         <button @click="categoriesOpen = !categoriesOpen" class="flex w-full items-center justify-between px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">
                             Categories
                             <i class="fas fa-chevron-down transition-transform" :class="{'rotate-180': categoriesOpen}"></i>
                         </button>
                         <div x-show="categoriesOpen" x-transition class="mt-2 space-y-2 pl-4">
-                            <a href="/category/beds" class="block text-sm text-charcoal hover:text-oak-brown">Beds</a>
-                            <a href="/category/sofas" class="block text-sm text-charcoal hover:text-oak-brown">Sofas</a>
-                            <a href="/category/dining-sets" class="block text-sm text-charcoal hover:text-oak-brown">Dining Sets</a>
-                            <a href="/category/tables" class="block text-sm text-charcoal hover:text-oak-brown">Tables</a>
-                            <a href="/category/tv-stands" class="block text-sm text-charcoal hover:text-oak-brown">TV Stands</a>
+                            <a href="{{ route('category.show', 'bed') }}" class="block text-sm text-charcoal hover:text-oak-brown">Beds</a>
+                            <a href="{{ route('category.show', 'sofa') }}" class="block text-sm text-charcoal hover:text-oak-brown">Sofas</a>
+                            <a href="{{ route('category.show', 'diningset') }}" class="block text-sm text-charcoal hover:text-oak-brown">Dining Sets</a>
+                            <a href="{{ route('shop.index') }}" class="block text-sm text-charcoal hover:text-oak-brown">Tables</a>
+                            <a href="{{ route('category.show', 'tvstand') }}" class="block text-sm text-charcoal hover:text-oak-brown">TV Stands</a>
                         </div>
                     </div>
-                    <a href="/about" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">About</a>
-                    <a href="/contact" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Contact</a>
-                    <a href="/cart" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Cart</a>
+                    <a href="{{ route('about') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">About</a>
+                    <a href="{{ route('contact') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Contact</a>
+                    <a href="{{ route('cart.index') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Cart</a>
                     @auth
                     <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Admin Dashboard</a>
                     <a href="{{ route('profile.edit') }}" class="block px-3 py-2 text-base font-medium text-charcoal hover:text-oak-brown">Account</a>

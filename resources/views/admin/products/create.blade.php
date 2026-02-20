@@ -36,7 +36,7 @@
                 <!-- Price -->
                 <div class="grid grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="price" class="block text-sm font-medium text-charcoal mb-2">Price (KES) *</label>
+                        <label for="price" class="block text-sm font-medium text-charcoal mb-2">Price (KSh) *</label>
                         <input type="number" id="price" name="price" step="0.01" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oak-brown @error('price') border-red-500 @enderror" value="{{ old('price') }}" required>
                         @error('price')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>

@@ -1,12 +1,14 @@
-<x-layouts.app>
+@extends('layouts.app')
+
+@section('content')
 
 <div class="min-h-screen bg-off-white">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <h1 class="text-3xl font-serif font-bold text-charcoal mb-4">Category: {{ ucfirst(str_replace('-', ' ', $slug)) }}</h1>
+        <h1 class="text-3xl font-serif font-bold text-charcoal mb-4">Category: {{ $category->name }}</h1>
 
-        <p class="text-lg text-gray-600 mb-8">Discover our premium {{ ucfirst(str_replace('-', ' ', $slug)) }} collection.</p>
+        <p class="text-lg text-gray-600 mb-8">Discover our premium {{ $category->name }} collection.</p>
 
         <div class="flex flex-col lg:flex-row gap-8">
 
@@ -70,7 +72,7 @@
 
                             <h3 class="text-lg font-medium text-charcoal">Oak Bed Frame</h3>
 
-                            <p class="text-oak-brown font-bold">$499</p>
+                            <p class="text-oak-brown font-bold">KSh 499</p>
 
                             <p class="text-sm text-gray-600">In Stock</p>
 
@@ -90,7 +92,7 @@
 
                             <h3 class="text-lg font-medium text-charcoal">Leather Sofa</h3>
 
-                            <p class="text-oak-brown font-bold">$899</p>
+                            <p class="text-oak-brown font-bold">KSh 899</p>
 
                             <p class="text-sm text-gray-600">In Stock</p>
 
@@ -110,7 +112,7 @@
 
                             <h3 class="text-lg font-medium text-charcoal">Dining Table</h3>
 
-                            <p class="text-oak-brown font-bold">$699</p>
+                            <p class="text-oak-brown font-bold">KSh 699</p>
 
                             <p class="text-sm text-gray-600">In Stock</p>
 
@@ -130,7 +132,7 @@
 
                             <h3 class="text-lg font-medium text-charcoal">TV Stand</h3>
 
-                            <p class="text-oak-brown font-bold">$299</p>
+                            <p class="text-oak-brown font-bold">KSh 299</p>
 
                             <p class="text-sm text-gray-600">In Stock</p>
 
@@ -190,11 +192,11 @@
 
                         <li><a href="/" class="hover:text-oak-brown">Home</a></li>
 
-                        <li><a href="/shop" class="hover:text-oak-brown">Shop</a></li>
+                        <li><a href="{{ route('shop.index') }}" class="hover:text-oak-brown">Shop</a></li>
 
-                        <li><a href="/about" class="hover:text-oak-brown">About</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-oak-brown">About</a></li>
 
-                        <li><a href="/contact" class="hover:text-oak-brown">Contact</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:text-oak-brown">Contact</a></li>
 
                     </ul>
 
@@ -206,15 +208,15 @@
 
                     <ul class="space-y-2">
 
-                        <li><a href="/category/beds" class="hover:text-oak-brown">Beds</a></li>
+                        <li><a href="{{ route('category.show', 'bed') }}" class="hover:text-oak-brown">Beds</a></li>
 
-                        <li><a href="/category/sofas" class="hover:text-oak-brown">Sofas</a></li>
+                        <li><a href="{{ route('category.show', 'sofa') }}" class="hover:text-oak-brown">Sofas</a></li>
 
-                        <li><a href="/category/dining-sets" class="hover:text-oak-brown">Dining Sets</a></li>
+                        <li><a href="{{ route('category.show', 'diningset') }}" class="hover:text-oak-brown">Dining Sets</a></li>
 
-                        <li><a href="/category/tables" class="hover:text-oak-brown">Tables</a></li>
+                        <li><a href="{{ route('shop.index') }}" class="hover:text-oak-brown">Tables</a></li>
 
-                        <li><a href="/category/tv-stands" class="hover:text-oak-brown">TV Stands</a></li>
+                        <li><a href="{{ route('category.show', 'tvstand') }}" class="hover:text-oak-brown">TV Stands</a></li>
 
                     </ul>
 
@@ -244,4 +246,4 @@
 
 </div>
 
-</x-layouts.app>
+@endsection

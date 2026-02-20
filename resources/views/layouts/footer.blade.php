@@ -8,20 +8,20 @@
             <div>
                 <h3 class="text-lg font-bold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="/" class="hover:text-oak-brown">Home</a></li>
-                    <li><a href="/shop" class="hover:text-oak-brown">Shop</a></li>
-                    <li><a href="/about" class="hover:text-oak-brown">About</a></li>
-                    <li><a href="/contact" class="hover:text-oak-brown">Contact</a></li>
+                    <li><a href="{{ route('home') }}" class="hover:text-oak-brown">Home</a></li>
+                    <li><a href="{{ route('shop.index') }}" class="hover:text-oak-brown">Shop</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-oak-brown">About</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-oak-brown">Contact</a></li>
                 </ul>
             </div>
             <div>
                 <h3 class="text-lg font-bold mb-4">Categories</h3>
                 <ul class="space-y-2">
-                    <li><a href="/category/beds" class="hover:text-oak-brown">Beds</a></li>
-                    <li><a href="/category/sofas" class="hover:text-oak-brown">Sofas</a></li>
-                    <li><a href="/category/dining-sets" class="hover:text-oak-brown">Dining Sets</a></li>
-                    <li><a href="/category/tables" class="hover:text-oak-brown">Tables</a></li>
-                    <li><a href="/category/tv-stands" class="hover:text-oak-brown">TV Stands</a></li>
+                    <li><a href="{{ route('category.show', 'bed') }}" class="hover:text-oak-brown">Beds</a></li>
+                    <li><a href="{{ route('category.show', 'sofa') }}" class="hover:text-oak-brown">Sofas</a></li>
+                    <li><a href="{{ route('category.show', 'diningset') }}" class="hover:text-oak-brown">Dining Sets</a></li>
+                    <li><a href="{{ route('shop.index') }}" class="hover:text-oak-brown">Tables</a></li>
+                    <li><a href="{{ route('category.show', 'tvstand') }}" class="hover:text-oak-brown">TV Stands</a></li>
                 </ul>
             </div>
             <div>

@@ -96,7 +96,7 @@
 
                                 <h3 class="text-lg font-medium text-charcoal">{{ $product->name }}</h3>
 
-                                <p class="text-oak-brown font-bold">KES {{ number_format($price, 2) }}</p>
+                                <p class="text-oak-brown font-bold">KSh {{ number_format($price, 2) }}</p>
 
                                 <p class="text-sm text-gray-600">In Stock</p>
 
@@ -105,7 +105,7 @@
                                     $message = "Hello Canon Furnitures 👋\n\n"
                                         ."I am interested in:\n\n"
                                         ."🪑 Product: {$product->name}\n"
-                                        ."💰 Price: KES {$price}\n\n"
+                                        ."💰 Price: KSh ".number_format($price, 2)."\n\n"
                                         ."Please assist me with availability and delivery.";
                                 @endphp
 

@@ -26,10 +26,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::redirect('/cart', '/shop')->name('cart.index');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+// Legacy category URL redirects
+Route::redirect('/category/beds', '/category/bed', 301);
+Route::redirect('/category/sofas', '/category/sofa', 301);
+Route::redirect('/category/dining-sets', '/category/diningset', 301);
+Route::redirect('/category/tv-stands', '/category/tvstand', 301);
+Route::redirect('/category/tables', '/shop');
 
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
 

@@ -23,7 +23,7 @@
                     Ideal for living rooms, bedrooms, dining areas, and more.
                 </p>
 
-                <a href="/shop" class="bg-oak-brown hover:bg-dark-oak text-off-white px-8 py-3 rounded-md font-medium transition">Shop Now</a>
+                <a href="{{ route('shop.index') }}" class="bg-oak-brown hover:bg-dark-oak text-off-white px-8 py-3 rounded-md font-medium transition">Shop Now</a>
 
             </div>
 
@@ -47,7 +47,7 @@
 
                     <h3 class="text-lg font-medium text-charcoal">Beds</h3>
 
-                    <a href="/shop" class="text-oak-brown hover:text-dark-oak">Shop Beds</a>
+                    <a href="{{ route('shop.index') }}" class="text-oak-brown hover:text-dark-oak">Shop Beds</a>
 
                 </div>
 
@@ -57,7 +57,7 @@
 
                     <h3 class="text-lg font-medium text-charcoal">Sofas</h3>
 
-                    <a href="/shop" class="text-oak-brown hover:text-dark-oak">Shop Sofas</a>
+                    <a href="{{ route('shop.index') }}" class="text-oak-brown hover:text-dark-oak">Shop Sofas</a>
 
                 </div>
 
@@ -67,7 +67,7 @@
 
                     <h3 class="text-lg font-medium text-charcoal">Dining Sets</h3>
 
-                    <a href="/shop" class="text-oak-brown hover:text-dark-oak">Shop Dining Sets</a>
+                    <a href="{{ route('shop.index') }}" class="text-oak-brown hover:text-dark-oak">Shop Dining Sets</a>
 
                 </div>
 
@@ -77,7 +77,7 @@
 
                     <h3 class="text-lg font-medium text-charcoal">Tables</h3>
 
-                    <a href="/shop" class="text-oak-brown hover:text-dark-oak">Shop Tables</a>
+                    <a href="{{ route('shop.index') }}" class="text-oak-brown hover:text-dark-oak">Shop Tables</a>
 
                 </div>
 
@@ -87,7 +87,7 @@
 
                     <h3 class="text-lg font-medium text-charcoal">TV Stands</h3>
 
-                    <a href="/shop" class="text-oak-brown hover:text-dark-oak">Shop TV Stands</a>
+                    <a href="{{ route('shop.index') }}" class="text-oak-brown hover:text-dark-oak">Shop TV Stands</a>
 
                 </div>
 
@@ -119,7 +119,7 @@
 
                         <p class="text-oak-brown font-bold">Ksh. 35,000 </p>
 
-                        <a href="/shop" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
+                        <a href="{{ route('shop.index') }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 
                     </div>
 
@@ -137,7 +137,7 @@
 
                         <p class="text-oak-brown font-bold">Ksh 90,000</p>
 
-                        <a href="/shop" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
+                        <a href="{{ route('shop.index') }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 
                     </div>
 
@@ -155,7 +155,7 @@
 
                         <p class="text-oak-brown font-bold">Ksh 25,000</p>
 
-                        <a href="/shop" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
+                        <a href="{{ route('shop.index') }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 
                     </div>
 
@@ -173,7 +173,7 @@
 
                         <p class="text-oak-brown font-bold">Ksh 20,000</p>
 
-                        <a href="/shop" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
+                        <a href="{{ route('shop.index') }}" class="mt-2 inline-block bg-oak-brown hover:bg-dark-oak text-off-white px-4 py-2 rounded-md text-sm">View Details</a>
 
                     </div>
 
@@ -241,7 +241,7 @@
 
             <p class="text-lg mb-8">Browse our collection and find the perfect pieces.</p>
 
-            <a href="/shop" class="bg-dark-oak hover:bg-charcoal text-off-white px-8 py-3 rounded-md font-medium transition">Browse Collection</a>
+            <a href="{{ route('shop.index') }}" class="bg-dark-oak hover:bg-charcoal text-off-white px-8 py-3 rounded-md font-medium transition">Browse Collection</a>
 
         </div>
 
