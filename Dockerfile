@@ -1,6 +1,6 @@
 FROM php:8.2-cli
 
-# Install system dependencies including libpq-dev for PostgreSQL
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -8,11 +8,12 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \      
+    libpq-dev \
     zip \
-    curl
+    curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions including PostgreSQL PDO
+# Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring zip exif pcntl
 
 # Install Composer
@@ -35,8 +36,8 @@ RUN chmod -R 775 storage bootstrap/cache
 RUN php artisan config:cache
 RUN php artisan route:cache
 
-# Expose Render port
+# Expose port (Render sets $PORT automatically)
 EXPOSE 10000
 
-# Start Laravel
-CMD php artisan serve --host=0.0.0.0 --port=10000
+# Start Laravel using PHP built-in server pointing to public folder
+CMD ["php", "-S", "0.0.0.0:$PORT", "-t", "public"]
