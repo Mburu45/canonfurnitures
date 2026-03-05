@@ -1,3 +1,4 @@
+# Use PHP CLI 8.2 base image
 FROM php:8.2-cli
 
 # Install system dependencies
@@ -22,22 +23,23 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy app files
+# Copy application files
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
+# Set permissions for storage and cache
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 
-# Cache config/routes
+# Cache configuration and routes
 RUN php artisan config:cache
 RUN php artisan route:cache
 
-# Expose port (Render sets $PORT automatically)
+# Expose port (optional, Render handles $PORT automatically)
 EXPOSE 10000
 
 # Start Laravel using PHP built-in server pointing to public folder
-CMD ["php", "-S", "0.0.0.0:$PORT", "-t", "public"]
+# Shell form is required so $PORT expands correctly
+CMD php -S 0.0.0.0:$PORT -t public
