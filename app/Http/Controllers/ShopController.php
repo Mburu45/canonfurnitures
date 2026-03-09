@@ -10,7 +10,7 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::where('is_active', true)->with('category');
+        $query = Product::where('is_active', true)->with(['category', 'images']);
 
         // Filter by category
         if ($request->has('category') && $request->category) {
@@ -35,7 +35,7 @@ class ShopController extends Controller
             $query->where('stock', '=', 0);
         }
 
-        $products = $query->paginate(12);
+        $products = $query->latest()->paginate(24);
 
         $categories = Category::all(); // For filter options
 

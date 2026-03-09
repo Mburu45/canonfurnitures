@@ -126,6 +126,12 @@
 
                 </div>
 
+                @if ($products->hasPages())
+                    <div class="mt-10 flex justify-center shop-pagination">
+                        {{ $products->appends(request()->query())->links() }}
+                    </div>
+                @endif
+
             </div>
 
         </div>
@@ -135,6 +141,32 @@
 </div>
 
 @include('layouts.footer')
+
+<style>
+    .shop-pagination nav > div:first-child {
+        display: none;
+    }
+
+    .shop-pagination .relative.z-0.inline-flex {
+        gap: 0.35rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        box-shadow: none;
+    }
+
+    .shop-pagination .relative.z-0.inline-flex > * {
+        border-radius: 0.5rem;
+        border: 1px solid #d1d5db;
+        min-width: 2.25rem;
+        text-align: center;
+    }
+
+    .shop-pagination span[aria-current="page"] span {
+        background-color: #8b5e34;
+        border-color: #8b5e34;
+        color: #ffffff;
+    }
+</style>
 
 <!-- Lightbox Modal -->
 <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center z-50">
